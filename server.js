@@ -20,13 +20,14 @@ app.set('view engine', 'handlebars');
 //connecting to MongoDB
 
 var databaseUri = 'mongodb://localhost/climbing_news';
+mongoose.connect(databaseUri);
 
-if (process.env.MONGODB_URI) {
-  mongoose.connect(process.env.MONGODB_URI);
-}
-else {
-  mongoose.connect(databaseUri);
-}
+// if (process.env.MONGODB_URI) {
+//   mongoose.connect(process.env.MONGODB_URI);
+// }
+// else {
+//   mongoose.connect(databaseUri);
+// }
 // mongoose.connect('mongodb://<dbuser>:<dbpassword>@ds121026.mlab.com:21026/heroku_k9kc44w1');
 
 

@@ -8,8 +8,8 @@ var axios = require('axios');
 var cheerio = require('cheerio');
 
 //Require models
-var Comment = require('../models/Comment.js');
-var Article = require('../models/Article.js');
+var Comment = require('../models/comment.js');
+var Article = require('../models/article.js');
 
 //index
 router.get('/', function(req, res) {
@@ -28,7 +28,7 @@ router.get('/', function(req, res) {
 //   });
 // });
 
-// A GET request to scrape Moutain Project website
+// A GET request to scrape Climbing Magazine website
 router.get('/scrape', function(req, res) {
     // First, we grab the body of the html with request
     axios.get('https://www.climbing.com/news/', function(error, response, html) {
@@ -42,7 +42,7 @@ router.get('/scrape', function(req, res) {
             var result = {};
 
             // Add the text and href of every link, and save them as properties of the result object
-            result.title = $(element).children().text();
+            result.title = $(element).find().text();
             result.link = $(element).find('a').attr('href');
             console.log("https://www.climbing.com/news/" + link);
 
