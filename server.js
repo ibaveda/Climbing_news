@@ -9,7 +9,7 @@ var app = express();
 app.use(logger('dev'));
 app.use(express.urlencoded({ extended: true }));
 
-app.use(express.static(process.cwd() + '/public'));
+app.use(express.static('public'));
 
 var exphbs = require('express-handlebars');
 app.engine('handlebars', exphbs({

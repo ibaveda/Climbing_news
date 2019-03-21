@@ -8,8 +8,8 @@ var axios = require('axios');
 var cheerio = require('cheerio');
 
 //Require models
-var Comment = require('../models/comment.js');
-var Article = require('../models/article.js');
+var Comment = require('../models/Comment.js');
+var Article = require('../models/Article.js');
 
 //index
 router.get('/', function(req, res) {
