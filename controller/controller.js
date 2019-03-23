@@ -37,7 +37,7 @@ router.get('/scrape', function(req, res) {
         var titlesArray = [];
         // Now, we grab every article
         $('h3').each(function(i, element) {
-          console.log(element);
+          // console.log(element);
             // Save an empty result object
             var result = {};
 
@@ -149,7 +149,7 @@ router.get('/readArticle/:id', function(req, res){
         request(link, function(error, response, html) {
           var $ = cheerio.load(html);
 
-          $('.float-xs-left topic text-truncate').each(function(i, element){
+          $('h3').each(function(i, element){
             hbsObj.body = $(this).children('a').text();
             //send article body and comments to article.handlebars through hbsObj
             res.render('article', hbsObj);
