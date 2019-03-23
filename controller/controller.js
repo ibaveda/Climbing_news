@@ -4,7 +4,7 @@ var router = express.Router();
 
 
 //require request and cheerio to scrape
-var axios = require('axios');
+var request = require('request');
 var cheerio = require('cheerio');
 
 //Require models
@@ -31,20 +31,20 @@ router.get('/', function(req, res) {
 // A GET request to scrape Climbing Magazine website
 router.get('/scrape', function(req, res) {
     // First, we grab the body of the html with request
-    axios.get('https://www.climbing.com/news/', function(error, response, html) {
+    request('https://www.climbing.com/news/', function(error, response, html) {
         // Then, we load that into cheerio and save it to $ for a shorthand selector
         var $ = cheerio.load(html);
         var titlesArray = [];
         // Now, we grab every article
-        $('div.l-grid--item').each(function(i, element) {
+        $('h2').each(function(i, element) {
           console.log(element);
             // Save an empty result object
             var result = {};
 
             // Add the text and href of every link, and save them as properties of the result object
-            result.title = $(element).find().text();
-            result.link = $(element).find('a').attr('href');
-            console.log("https://www.climbing.com/news/" + link);
+            result.title = $(this).find('a').text();
+            result.link = $(this).children('a').attr('href');
+            // console.log("https://www.climbing.com/news/" + link);
 
             //ensures that no empty title or links are sent to mongodb
             if(result.title !== "" && result.link !== ""){
@@ -150,7 +150,7 @@ router.get('/readArticle/:id', function(req, res){
           var $ = cheerio.load(html);
 
           $('.float-xs-left topic text-truncate').each(function(i, element){
-            hbsObj.body = $(this).children('a.topic').text();
+            hbsObj.body = $(this).children('a').text();
             //send article body and comments to article.handlebars through hbsObj
             res.render('article', hbsObj);
             //prevents loop through so it doesn't return an empty hbsObj.body
