@@ -129,6 +129,7 @@ router.get('/clearAll', function(req, res) {
 });
 
 router.get('/readArticle/:id', function(req, res){
+  console.log("hello inside readArticle");
   var articleId = req.params.id;
   var hbsObj = {
     article: [],
